@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Glossário Simples
  * Description: Adiciona um Glossário Simples ao Wordpress que somente olha o conteúdo desejado, sem internas, sem filtros ou seja Simples.
- * Version: 1.1
+ * Version: 1.1.1
  * Author: Willder Azevedo
  */
 if (!defined('ABSPATH')) {
@@ -320,7 +320,7 @@ function wa_glossary_enqueue_scripts()
 
     wp_enqueue_script(
         'wa-glossary-script',
-        plugin_dir_url(__FILE__) . 'assets/core.js',
+        plugin_dir_url(__FILE__) . 'assets/main.js',
         [],
         '1.1.0',
         true
