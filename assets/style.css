@@ -1,0 +1,45 @@
+.term-link {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px dashed #000;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.term-link:focus,
+.term-link:active,
+.term-link:active,
+.term-link:hover {
+  color: #000;
+}
+
+.term-popover {
+  min-width: 450px;
+  border-radius: 0;
+  border: 1px solid #f1f1f1;
+  box-shadow: -7px 7px 40px 0px rgba(0, 0, 0, 0.2);
+  --bs-popover-border-color: #f1f1f1;
+  --bs-popover-arrow-border: #f1f1f1;
+  --bs-popover-header-bg: #fafafa;
+}
+
+.term-popover .popover-arrow {
+  visibility: hidden !important;
+}
+
+.term-popover .popover-header {
+  font-size: 12px;
+  border-radius: 0;
+  padding: 15px;
+  font-family: "Lora";
+}
+
+.term-popover .popover-body {
+  padding: 19px;
+  min-height: 250px;
+  font-family: "Lora";
+}
+
+.term-popover .popover-body p:last-child {
+  margin-bottom: 0 !important;
+}

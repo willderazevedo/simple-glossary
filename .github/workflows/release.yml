@@ -1,0 +1,32 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy license to wordpress version
+        run: cp LICENSE ./license.txt
+
+      - name: Create ZIP file
+        run: |
+          zip -r simple-glossary.zip . \
+          -x ".git/*" ".github/*" "README.md" "LICENSE"
+
+      - name: Create release and attach ZIP
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+          files: simple-glossary.zip
