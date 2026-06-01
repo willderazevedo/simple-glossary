@@ -82,7 +82,9 @@ Auto Injection
 
 The plugin will automatically wrap the `the_content` output with:
 
+```html
 <div class="glossary-wrapper">
+```
 
 or with your custom configured wrapper class.
 
@@ -92,15 +94,19 @@ or with your custom configured wrapper class.
 
 Disable auto injection and manually add:
 
+```html
 <div class="glossary-wrapper">
     Your content here
 </div>
+```
 
 or:
 
+```html
 <div class="my-custom-class">
     Your content here
 </div>
+```
 
 Then configure this class inside the plugin settings.
 
@@ -145,6 +151,7 @@ Hovering the term will display a popover.
 
 ## Structure
 
+```
 simple-glossary/
 ├── assets/
 │ ├── main.js
@@ -153,6 +160,7 @@ simple-glossary/
 │ ├── bootstrap/
 │ └── he/
 └── simple-glossary.php
+```
 
 ---
 
