@@ -3,8 +3,24 @@
 /**
  * Plugin Name: Glossário Simples
  * Description: Adiciona um Glossário Simples ao Wordpress que somente olha o conteúdo desejado, sem internas, sem filtros ou seja Simples.
- * Version: 1.1.1
- * Author: Willder Azevedo
+ * Version:     1.1.2
+ * Author:      Willder Azevedo
+ * Author URI:  https://github.com/willderazevedo
+ * License: GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * 
+ * @package SimpleGlossary
+ * @category Plugin
+ * 
+ * Simple Glossary is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * Simple Glossary is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  */
 if (!defined('ABSPATH')) {
     exit;
