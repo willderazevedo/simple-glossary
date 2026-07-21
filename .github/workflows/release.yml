@@ -22,7 +22,7 @@ jobs:
       - name: Create ZIP file
         run: |
           zip -r simple-glossary.zip . \
-          -x ".git/*" ".github/*" "README.md" "LICENSE"
+          -x ".git/*" ".github/*" "README.md" "LICENSE" ".prettierignore" "assets/*.png"
 
       - name: Create release and attach ZIP
         uses: softprops/action-gh-release@v1
