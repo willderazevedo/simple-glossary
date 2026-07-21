@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function wa_glossary_custom_post_type()
+function wa_simple_glossary_custom_post_type()
 {
     $postLabels = [
         'name' => 'Glossário',
@@ -84,22 +84,22 @@ function wa_glossary_custom_post_type()
         'rewrite' => ['slug' => 'glossario-categoria'],
     ];
 
-    register_post_type('wa_glossary', $postArgs);
+    register_post_type('wa_simple_glossary', $postArgs);
 
     register_taxonomy(
-        'wa_glossary_category',
-        ['wa_glossary'],
+        'wa_simple_glossary_category',
+        ['wa_simple_glossary'],
         $taxonomyArgs
     );
 }
 
-add_action('init', 'wa_glossary_custom_post_type');
+add_action('init', 'wa_simple_glossary_custom_post_type');
 
-function wa_glossary_register_settings()
+function wa_simple_glossary_register_settings()
 {
     register_setting(
-        'wa_glossary_settings_group',
-        'wa_glossary_wrapper_class',
+        'wa_simple_glossary_settings_group',
+        'wa_simple_glossary_wrapper_class',
         [
             'sanitize_callback' => 'sanitize_html_class',
             'default' => 'glossary-wrapper'
@@ -107,8 +107,8 @@ function wa_glossary_register_settings()
     );
 
     register_setting(
-        'wa_glossary_settings_group',
-        'wa_glossary_auto_inject',
+        'wa_simple_glossary_settings_group',
+        'wa_simple_glossary_auto_inject',
         [
             'sanitize_callback' => function ($value) {
                 return $value ? 1 : 0;
@@ -118,42 +118,42 @@ function wa_glossary_register_settings()
     );
 
     add_settings_section(
-        'wa_glossary_main_section',
+        'wa_simple_glossary_main_section',
         'Configurações do Glossário',
         null,
-        'wa-glossary-settings'
+        'wa-simple-glossary-settings'
     );
 
     add_settings_field(
-        'wa_glossary_wrapper_class',
+        'wa_simple_glossary_wrapper_class',
         'Classe Wrapper',
-        'wa_glossary_wrapper_class_callback',
-        'wa-glossary-settings',
-        'wa_glossary_main_section'
+        'wa_simple_glossary_wrapper_class_callback',
+        'wa-simple-glossary-settings',
+        'wa_simple_glossary_main_section'
     );
 
     add_settings_field(
-        'wa_glossary_auto_inject',
+        'wa_simple_glossary_auto_inject',
         'Auto Injeção',
-        'wa_glossary_auto_inject_callback',
-        'wa-glossary-settings',
-        'wa_glossary_main_section'
+        'wa_simple_glossary_auto_inject_callback',
+        'wa-simple-glossary-settings',
+        'wa_simple_glossary_main_section'
     );
 }
 
-add_action('admin_init', 'wa_glossary_register_settings');
+add_action('admin_init', 'wa_simple_glossary_register_settings');
 
-function wa_glossary_wrapper_class_callback()
+function wa_simple_glossary_wrapper_class_callback()
 {
     $value = get_option(
-        'wa_glossary_wrapper_class',
+        'wa_simple_glossary_wrapper_class',
         'glossary-wrapper'
     );
 
     echo '
         <input
             type="text"
-            name="wa_glossary_wrapper_class"
+            name="wa_simple_glossary_wrapper_class"
             value="' . esc_attr($value) . '"
             class="regular-text"
         />
@@ -166,10 +166,10 @@ function wa_glossary_wrapper_class_callback()
     ';
 }
 
-function wa_glossary_auto_inject_callback()
+function wa_simple_glossary_auto_inject_callback()
 {
     $value = get_option(
-        'wa_glossary_auto_inject',
+        'wa_simple_glossary_auto_inject',
         1
     );
 
@@ -177,7 +177,7 @@ function wa_glossary_auto_inject_callback()
         <label>
             <input
                 type="checkbox"
-                name="wa_glossary_auto_inject"
+                name="wa_simple_glossary_auto_inject"
                 value="1"
                 ' . checked(1, $value, false) . '
             />
@@ -186,20 +186,20 @@ function wa_glossary_auto_inject_callback()
     ';
 }
 
-function wa_glossary_add_settings_page()
+function wa_simple_glossary_add_settings_page()
 {
     add_options_page(
         'Glossário Simples',
         'Glossário Simples',
         'manage_options',
-        'wa-glossary-settings',
-        'wa_glossary_render_settings_page'
+        'wa-simple-glossary-settings',
+        'wa_simple_glossary_render_settings_page'
     );
 }
 
-add_action('admin_menu', 'wa_glossary_add_settings_page');
+add_action('admin_menu', 'wa_simple_glossary_add_settings_page');
 
-function wa_glossary_render_settings_page()
+function wa_simple_glossary_render_settings_page()
 {
     if (!current_user_can('manage_options')) {
         return;
@@ -211,8 +211,8 @@ function wa_glossary_render_settings_page()
 
         <form method="post" action="options.php">
             <?php
-            settings_fields('wa_glossary_settings_group');
-            do_settings_sections('wa-glossary-settings');
+            settings_fields('wa_simple_glossary_settings_group');
+            do_settings_sections('wa-simple-glossary-settings');
             submit_button();
             ?>
         </form>
@@ -220,7 +220,7 @@ function wa_glossary_render_settings_page()
 <?php
 }
 
-function wa_glossary_auto_inject_wrapper($content)
+function wa_simple_glossary_auto_inject_wrapper($content)
 {
     if (is_admin()) {
         return $content;
@@ -231,7 +231,7 @@ function wa_glossary_auto_inject_wrapper($content)
     }
 
     $autoInject = get_option(
-        'wa_glossary_auto_inject',
+        'wa_simple_glossary_auto_inject',
         1
     );
 
@@ -240,7 +240,7 @@ function wa_glossary_auto_inject_wrapper($content)
     }
 
     $wrapperClass = get_option(
-        'wa_glossary_wrapper_class',
+        'wa_simple_glossary_wrapper_class',
         'glossary-wrapper'
     );
 
@@ -257,13 +257,13 @@ function wa_glossary_auto_inject_wrapper($content)
 
 add_filter(
     'the_content',
-    'wa_glossary_auto_inject_wrapper'
+    'wa_simple_glossary_auto_inject_wrapper'
 );
 
-function wa_glossary_enqueue_scripts()
+function wa_simple_glossary_enqueue_scripts()
 {
     $terms = get_posts([
-        'post_type' => 'wa_glossary',
+        'post_type' => 'wa_simple_glossary',
         'posts_per_page' => -1,
         'post_status' => 'publish',
         'no_found_rows' => true,
@@ -276,7 +276,7 @@ function wa_glossary_enqueue_scripts()
     foreach ($terms as $term) {
         $categories = wp_get_post_terms(
             $term->ID,
-            'wa_glossary_category'
+            'wa_simple_glossary_category'
         );
 
         $categoryNames = [];
@@ -300,7 +300,7 @@ function wa_glossary_enqueue_scripts()
     }
 
     $wrapperClass = get_option(
-        'wa_glossary_wrapper_class',
+        'wa_simple_glossary_wrapper_class',
         'glossary-wrapper'
     );
 
@@ -328,22 +328,22 @@ function wa_glossary_enqueue_scripts()
     );
 
     wp_enqueue_style(
-        'wa-glossary-style',
+        'wa-simple-glossary-style',
         plugin_dir_url(__FILE__) . 'assets/style.css',
         [],
-        '1.0.0'
+        '1.1.2'
     );
 
     wp_enqueue_script(
-        'wa-glossary-script',
+        'wa-simple-glossary-script',
         plugin_dir_url(__FILE__) . 'assets/main.js',
         [],
-        '1.1.0',
+        '1.1.2',
         true
     );
 
     wp_localize_script(
-        'wa-glossary-script',
+        'wa-simple-glossary-script',
         'glossaryData',
         [
             'terms' => $termsObject,
@@ -354,6 +354,6 @@ function wa_glossary_enqueue_scripts()
 
 add_action(
     'wp_enqueue_scripts',
-    'wa_glossary_enqueue_scripts',
+    'wa_simple_glossary_enqueue_scripts',
     20
 );
